@@ -8,10 +8,11 @@ const sendHttpRequest = (method, url, data) => {
 	// more promises behind it.
 	return fetch(url, {
 		method,
-		body: JSON.stringify(data),
-		headers: {
-			'Conent-Type': 'application/json', // for this project this may be omitted
-		},
+		// body: JSON.stringify(data),
+        // for form data, the fetch API will automatically see it's form data
+        // and sets the header accordingly
+		body: data,
+		
 	}).then((response) => {
         if (response.status >= 200 && response.status < 300) {
             return response.json()
@@ -49,13 +50,18 @@ const fetchPosts = async () => {
 
 const createPost = async (title, content) => {
 	const userId = Math.random();
-	const post = {
-		title: title,
-		body: content,
-		userId,
-	};
+	// const post = {
+	// 	title: title,
+	// 	body: content,
+	// 	userId,
+	// };
 
-	sendHttpRequest('POST', 'https://jsonplaceholder.typicode.com/posts', post);
+    // form data is no JSON data!
+    const fd = new FormData(form);
+    // it automatically collects form data according to the name-value pairs.
+    fd.append('userId', userId)
+
+	sendHttpRequest('POST', 'https://jsonplaceholder.typicode.com/posts', fd);
 };
 
 fetchButton.addEventListener('click', fetchPosts);
