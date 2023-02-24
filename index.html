@@ -9,7 +9,8 @@
     <script src="./app.js" defer></script>
   </head>
   <body>
-    <template id="new-post">
+    
+    <template id="post-template">
       <li class="post-item">
         <h2></h2>
         <p></p>
@@ -17,6 +18,9 @@
       </li>
     </template>
     <section id="new-post">
+      <p>Please note that the site uses the {JSON}Placeholder dummy API. GET requests are rendered
+      on the page while POST and DELETE requests can only be traced in DevTool's network tab.
+    </p>
       <form>
         <div class="form-control">
           <label for="title">Title</label>
